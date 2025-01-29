@@ -1,0 +1,37 @@
+{
+  "name": "bagrinsergiu/brizy-api-entities",
+  "type": "symfony-bundle",
+  "require": {
+    "php": "7.2|8.*",
+    "ext-ctype": "*",
+    "ext-curl": "*",
+    "ext-iconv": "*",
+    "ext-json": "*",
+    "doctrine/orm": "^2|^3",
+    "doctrine/doctrine-bundle": "^1|^2",
+    "symfony/symfony": "^3",
+    "gedmo/doctrine-extensions": "^2.1"
+  },
+  "config": {
+    "platform": {
+      "php": "7.2"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Brizy\\Bundle\\ApiEntitiesBundle\\": "src/",
+      "Brizy\\Bundle\\ApiEntitiesBundle\\TestFactory\\": "tests/Factory/"
+    },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Brizy\\Bundle\\ApiEntitiesBundle\\Tests\\": "tests/"
+    },
+    "exclude-from-classmap": [
+      "/Factory/"
+    ]
+  }
+}
