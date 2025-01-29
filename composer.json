@@ -9,7 +9,7 @@
     "ext-json": "*",
     "doctrine/orm": "^2||^3",
     "doctrine/doctrine-bundle": "^1||^2",
-    "symfony/symfony": "^3||^4||^5",
+    "symfony/symfony": "*",
     "gedmo/doctrine-extensions": "^2||^3"
   },
   "config": {
