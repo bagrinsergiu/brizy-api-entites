@@ -9,8 +9,9 @@
     "ext-json": "*",
     "doctrine/orm": "^2||^3",
     "doctrine/doctrine-bundle": "^1||^2",
-    "symfony/symfony": "*",
-    "gedmo/doctrine-extensions": "^2||^3"
+    "symfony/config": "*",
+    "gedmo/doctrine-extensions": "^2||^3",
+    symfony/http-kernel: "^3 || ^4.4 || ^5.1 || ^6.0"
   },
   "config": {
     "platform": {
