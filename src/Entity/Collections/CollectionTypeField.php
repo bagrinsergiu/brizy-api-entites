@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brizy\Bundle\ApiEntitiesBundle\Entity\Collections;
 
+use Brizy\Bundle\ApiEntitiesBundle\Constants\CollectionConst;
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits as CommonTraits;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -99,7 +100,7 @@ class CollectionTypeField
     /**
      * @ORM\Column(type="string", length=30, nullable=false, options={"default": CollectionConst::FIELD_DEFAULT_PLACEMENT})
      */
-    protected $placement = 'CollectionConst::FIELD_DEFAULT_PLACEMENT';
+    protected $placement = CollectionConst::FIELD_DEFAULT_PLACEMENT;
 
     /**
      * @ORM\Column(type="json", nullable=true)
