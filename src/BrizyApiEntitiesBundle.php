@@ -1,5 +1,7 @@
 <?php
 
+namespace Brizy\Bundle\ApiEntitiesBundle;
+
 use Brizy\Bundle\ApiEntitiesBundle\DependencyInjection\BrizyApiEntitiesBundleExtension;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
