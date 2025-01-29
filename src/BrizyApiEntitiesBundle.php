@@ -14,7 +14,7 @@ final class BrizyApiEntitiesBundle extends Bundle
      */
     public function getContainerExtension()
     {
-        return new BrizyApiEntitiesBundle();
+        return new BrizyApiEntitiesBundleExtension();
     }
 
     /**
