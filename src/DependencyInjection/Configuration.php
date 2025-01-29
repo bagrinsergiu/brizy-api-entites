@@ -15,8 +15,8 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->getRootNode(BrizyApiEntitiesBundleExtension::ALIAS_NAME);
+        $treeBuilder = new TreeBuilder(BrizyApiEntitiesBundleExtension::ALIAS_NAME );
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode->append($this->createPersistenceNode());
 
@@ -25,7 +25,7 @@ final class Configuration implements ConfigurationInterface
 
     private function createPersistenceNode(): NodeDefinition
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('persistence');
         $node = $treeBuilder->getRootNode('persistence');
 
         $node
