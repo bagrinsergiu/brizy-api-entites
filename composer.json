@@ -10,7 +10,7 @@
     "doctrine/orm": "^2|^3",
     "doctrine/doctrine-bundle": "^1|^2",
     "symfony/symfony": "^3",
-    "gedmo/doctrine-extensions": "^2.1"
+    "gedmo/doctrine-extensions": "^2"
   },
   "config": {
     "platform": {
