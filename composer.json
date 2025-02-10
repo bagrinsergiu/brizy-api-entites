@@ -2,7 +2,7 @@
   "name": "bagrinsergiu/brizy-api-entities",
   "type": "symfony-bundle",
   "require": {
-    "php": "7.2|8.*",
+    "php": ">=7.2|8.*",
     "ext-ctype": "*",
     "ext-curl": "*",
     "ext-iconv": "*",
