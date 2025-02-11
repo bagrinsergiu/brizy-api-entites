@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brizy\Bundle\ApiEntitiesBundle\Repository\Common;
 
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 abstract class EntityRepository extends ServiceEntityRepository implements EntityRepositoryInterface

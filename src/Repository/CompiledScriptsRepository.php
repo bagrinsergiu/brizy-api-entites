@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Brizy\Bundle\ApiEntitiesBundle\Repository;
 
-use App\Entity\CompiledScripts;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Brizy\Bundle\ApiEntitiesBundle\Entity\CompiledScripts;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method CompiledScripts|null find($id, $lockMode = null, $lockVersion = null)

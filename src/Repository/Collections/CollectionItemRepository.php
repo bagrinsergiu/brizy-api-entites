@@ -8,7 +8,7 @@ use Brizy\Bundle\ApiEntitiesBundle\Entity\Collections\CollectionItem;
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Collections\CollectionType;
 use Brizy\Bundle\ApiEntitiesBundle\Repository\Common\EntityRepository;
 use Brizy\Bundle\ApiEntitiesBundle\Repository\Common\SlugAbleEntity;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method CollectionItem|null find($id, $lockMode = null, $lockVersion = null)

@@ -7,7 +7,7 @@ use Brizy\Bundle\ApiEntitiesBundle\Entity\Collections\CollectionItem;
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Collections\CollectionItemField;
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Collections\CollectionTypeField;
 use Brizy\Bundle\ApiEntitiesBundle\Repository\Common\EntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method CollectionItemField|null find($id, $lockMode = null, $lockVersion = null)

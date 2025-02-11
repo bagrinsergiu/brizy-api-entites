@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Brizy\Bundle\ApiEntitiesBundle\Repository;
 
-use App\Entity\PageData;
+use Brizy\Bundle\ApiEntitiesBundle\Entity\PageData;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method PageData|null find($id, $lockMode = null, $lockVersion = null)

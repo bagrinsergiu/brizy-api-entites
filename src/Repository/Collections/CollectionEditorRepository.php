@@ -6,7 +6,7 @@ namespace Brizy\Bundle\ApiEntitiesBundle\Repository\Collections;
 
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Collections\CollectionEditor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method CollectionEditor|null find($id, $lockMode = null, $lockVersion = null)
