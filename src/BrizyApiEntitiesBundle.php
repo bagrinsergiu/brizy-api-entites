@@ -5,6 +5,7 @@ namespace Brizy\Bundle\ApiEntitiesBundle;
 use Brizy\Bundle\ApiEntitiesBundle\DependencyInjection\BrizyApiEntitiesBundleExtension;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class BrizyApiEntitiesBundle extends Bundle
@@ -12,7 +13,7 @@ final class BrizyApiEntitiesBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         return new BrizyApiEntitiesBundleExtension();
     }
