@@ -9,10 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait PriorityTrait
 {
-    /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=false)
-     */
+    #[ORM\Column(type: "integer", nullable: false)]
     protected $priority = 0;
 
     public function getPriority(): int

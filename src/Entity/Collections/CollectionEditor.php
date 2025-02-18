@@ -5,21 +5,15 @@ declare(strict_types=1);
 namespace Brizy\Bundle\ApiEntitiesBundle\Entity\Collections;
 
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits as CommonTraits;
+use Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionEditorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-/**
- * @ORM\Entity(repositoryClass="Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionEditorRepository", readOnly=true)
- * @ORM\Table(
- *     uniqueConstraints={
- *          @UniqueConstraint(columns={"project_id", "title"})
- *     }
- * )
- * @UniqueEntity(fields={"project", "title"}, errorPath="title")
- */
+#[ORM\Entity(repositoryClass: CollectionEditorRepository::class, readOnly: true)]
+#[ORM\Table(uniqueConstraints: [new ORM\UniqueConstraint(columns: ["project_id", "title"])])]
+#[UniqueEntity(fields: ["project", "title"], errorPath: "title")]
 class CollectionEditor
 {
     use CommonTraits\IdTrait;
@@ -27,22 +21,13 @@ class CollectionEditor
     use CommonTraits\ProjectTrait;
     use CommonTraits\TitleTrait;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=false)
-     */
+    #[ORM\Column(type: "text", nullable: false)]
     protected $url;
 
-    /**
-     * @var CollectionType[]
-     * @ORM\OneToMany(targetEntity="App\Entity\Collections\CollectionType", mappedBy="editor", fetch="LAZY")
-     */
+    #[ORM\OneToMany(targetEntity: CollectionType::class, mappedBy: "editor", fetch: "LAZY")]
     protected $collectionTypes;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: "boolean")]
     private $hidden = false;
 
     public function __construct()

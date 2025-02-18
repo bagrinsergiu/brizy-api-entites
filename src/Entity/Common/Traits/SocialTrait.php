@@ -10,9 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait SocialTrait
 {
-    /**
-     * @ORM\Column(type="json", nullable=true)
-     */
+     #[ORM\Column(type: "json", nullable: true)]
     protected array $social = [];
 
     public function getSocial(): array

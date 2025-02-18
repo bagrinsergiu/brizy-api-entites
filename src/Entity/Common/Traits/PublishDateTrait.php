@@ -10,11 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait PublishDateTrait
 {
-    /**
-     * @var \DateTimeInterface
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+     #[ORM\Column(type: "datetime", nullable: true)]
     protected $publishDate = null;
 
     public function getPublishDate(): ?\DateTimeInterface

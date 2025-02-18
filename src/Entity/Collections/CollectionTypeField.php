@@ -6,15 +6,14 @@ namespace Brizy\Bundle\ApiEntitiesBundle\Entity\Collections;
 
 use Brizy\Bundle\ApiEntitiesBundle\Constants\CollectionConst;
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits as CommonTraits;
+use Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionTypeFieldRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
-
  * @ORM\Entity(repositoryClass="Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionTypeFieldRepository", readOnly=true)
  * @ORM\Table(
  *     uniqueConstraints={
@@ -29,6 +28,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields={"collectionType", "slug"}, errorPath="slug")
  */
+#[ORM\Entity(repositoryClass: CollectionTypeFieldRepository::class)]
+#[ORM\Table(
+    indexes: [
+        new ORM\Index(columns: ["collection_type_id", "project_id", "priority"]),
+        new ORM\Index(columns: ["id", "project_id", "priority"]),
+    ],
+    uniqueConstraints: [
+        new ORM\UniqueConstraint(columns: ["collection_type_id", "slug"]),
+        new ORM\UniqueConstraint(columns: ["project_id", "collection_type_id", "id"]),
+    ]
+)]
+#[UniqueEntity(fields: ["collectionType", "slug"], errorPath: "slug")]
 class CollectionTypeField
 {
     use CommonTraits\IdTrait;
@@ -41,76 +52,47 @@ class CollectionTypeField
     public const HIDDEN_DEFAULT_VALUE = false;
     public const UNIQUE_DEFAULT_VALUE = false;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     protected $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Collections\CollectionType", inversedBy="fields")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     *
-     * @Assert\Type(CollectionType::class)
-     */
+    #[ORM\ManyToOne(targetEntity: CollectionType::class, inversedBy: "fields")]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     protected $collectionType;
 
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
+    #[ORM\Column(type: "string", length: 30)]
     protected $type;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", nullable=false)
-     */
+    #[ORM\Column(type: "string", nullable: false)]
     private $slug;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", options={"default": CollectionTypeField::REQUIRED_DEFAULT_VALUE})
-     */
+    #[ORM\Column(type: "boolean", options: ["default" => CollectionTypeField::REQUIRED_DEFAULT_VALUE])]
     protected $required = self::REQUIRED_DEFAULT_VALUE;
 
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean", options={"default": CollectionTypeField::HIDDEN_DEFAULT_VALUE})
-     */
+    #[ORM\Column(type: "boolean", options: ["default" => CollectionTypeField::HIDDEN_DEFAULT_VALUE])]
     protected $hidden = self::HIDDEN_DEFAULT_VALUE;
 
-    /**
-     * @var bool
-     * @ORM\Column(name="`unique`", type="boolean", options={"default": CollectionTypeField::UNIQUE_DEFAULT_VALUE})
-     */
+    #[ORM\Column(name: '`unique`', type: "boolean", options: ["default" => CollectionTypeField::UNIQUE_DEFAULT_VALUE])]
     protected $unique = self::UNIQUE_DEFAULT_VALUE;
 
     /**
      * @ORM\Column(type="string", length=120, nullable=false)
      */
+    #[ORM\Column(type: "string", length: 120, nullable: false)]
     protected $label;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: "text", nullable: true)]
     protected $description;
 
-    /**
-     * @ORM\Column(type="string", length=30, nullable=false, options={"default": CollectionConst::FIELD_DEFAULT_PLACEMENT})
-     */
+    #[ORM\Column(type: "string", length: 30, nullable: false, options: ["default" => CollectionConst::FIELD_DEFAULT_PLACEMENT])]
     protected $placement = CollectionConst::FIELD_DEFAULT_PLACEMENT;
 
-    /**
-     * @ORM\Column(type="json", nullable=true)
-     */
+    #[ORM\Column(type: "json", nullable: true)]
     protected $settings = [];
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Collections\CollectionType")
-     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: CollectionType::class)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     protected $reference;
 
     public function __construct()
@@ -164,7 +146,7 @@ class CollectionTypeField
 
     public function setRequired(?bool $required): self
     {
-        $this->required = (bool) $required;
+        $this->required = (bool)$required;
 
         return $this;
     }
@@ -176,7 +158,7 @@ class CollectionTypeField
 
     public function setHidden(?bool $hidden): self
     {
-        $this->hidden = (bool) $hidden;
+        $this->hidden = (bool)$hidden;
 
         return $this;
     }
@@ -188,7 +170,7 @@ class CollectionTypeField
 
     public function setUnique(?bool $unique): self
     {
-        $this->unique = (bool) $unique;
+        $this->unique = (bool)$unique;
 
         return $this;
     }

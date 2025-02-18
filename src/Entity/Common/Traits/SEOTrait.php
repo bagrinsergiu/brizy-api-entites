@@ -10,9 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait SEOTrait
 {
-    /**
-     * @ORM\Column(type="json", nullable=true)
-     */
+     #[ORM\Column(type: "json", nullable: true)]
     protected $seo = [];
 
     public function getSeo(): array

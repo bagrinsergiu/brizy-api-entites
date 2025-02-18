@@ -8,9 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait CodeInjectionPropertyTrait
 {
-    /**
-     * @ORM\Column(type="json", nullable=true)
-     */
+     #[ORM\Column(type: "json", nullable: true)]
     private $codeInjection = [];
 
     public function getCodeInjection(): ?array

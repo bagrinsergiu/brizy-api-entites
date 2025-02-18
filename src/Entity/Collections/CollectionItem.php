@@ -26,6 +26,7 @@ use Brizy\Bundle\ApiEntitiesBundle\Filter\GraphQL\CollectionItemsOrderFilter;
 use Brizy\Bundle\ApiEntitiesBundle\Filter\GraphQL\CollectionTypeFilter;
 use Brizy\Bundle\ApiEntitiesBundle\Filter\GraphQL\OffsetFilter;
 use Brizy\Bundle\ApiEntitiesBundle\Filter\GraphQL\ReferencedCollectionItemsFilter;
+use Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionItemRepository;
 use Brizy\Bundle\ApiEntitiesBundle\Resolver\CollectionItem\CollectionItemBySlugResolver;
 use Brizy\Bundle\ApiEntitiesBundle\Resolver\CommonCollectionResolver;
 use Brizy\Bundle\ApiEntitiesBundle\Resolver\CommonCreateMutationResolver;
@@ -42,20 +43,17 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
-/**
- * @ORM\Entity(repositoryClass="Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionItemRepository", readOnly=true)
- * @ORM\Table(
- *     uniqueConstraints={
- *          @UniqueConstraint(columns={"project_id","slug"})
- *     },
- *     indexes={
- *          @Index(columns={"project_id", "id",}),
- *          @Index(columns={"project_id", "type_id", "id"}),
- *          @Index(columns={"project_id", "type_id", "title"}),
- *     }
- * )
- * @Gedmo\Loggable(logEntryClass="Brizy\Bundle\ApiEntitiesBundle\Revisions\Entity\RevisionLog")
- */
+#[ORM\Entity(repositoryClass: CollectionItemRepository::class, readOnly: true)]
+#[ORM\Table(
+    indexes: [
+        new ORM\Index(columns: ["project_id", "id"]),
+        new ORM\Index(columns: ["project_id", "type_id", "id"]),
+        new ORM\Index(columns: ["project_id", "type_id", "title"])
+    ],
+    uniqueConstraints: [
+        new ORM\UniqueConstraint(columns: ["project_id", "slug"])
+    ]
+)]
 class CollectionItem
 {
     use CommonTraits\IdTrait;
@@ -71,105 +69,60 @@ class CollectionItem
 
     public const SEO_DEFAULT_ENABLE_INDEXING = true;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=120, nullable=false)
-      */
+    #[ORM\Column(type: "string", length: 120, nullable: false)]
     protected $title = '';
 
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
+    #[ORM\Column(type: "string", length: 20)]
     protected $status;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Brizy\Bundle\ApiEntitiesBundle\Entity\Collections\CollectionType", fetch="LAZY")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: CollectionType::class, fetch: "LAZY")]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     protected $type;
 
-    /**
-     * @var string
-     * @ORM\Column(type="string", nullable=false)
-     */
+    #[ORM\Column(type: "string", nullable: false)]
     protected $slug = '';
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="Brizy\Bundle\ApiEntitiesBundle\Entity\Collections\CollectionItemField",
-     *     mappedBy="item",
-     *     cascade={"persist", "remove"},
-     *     fetch="LAZY"
-     * )
-     *
-     * @MaxDepth(5)
-     */
+    #[ORM\OneToMany(
+        targetEntity: CollectionItemField::class,
+        mappedBy: "item",
+        cascade: ["persist", "remove"],
+        fetch: "LAZY"
+    )]
     protected $fields;
 
-    /**
-     * @var Template
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     *
-     * @deprecated
-     */
+    #[ORM\Column(type: "integer", nullable: true)]
     private $template;
 
-    /**
-     * @ORM\OneToOne(targetEntity=PageData::class, cascade={"persist", "remove"}, fetch="LAZY")
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id", onDelete="SET NULL")
-     *
-     * @Gedmo\Versioned
-     */
+    #[ORM\OneToOne(targetEntity: PageData::class, cascade: ["persist", "remove"], fetch: "LAZY")]
+    #[ORM\JoinColumn(nullable: true, referencedColumnName: "id", onDelete: "SET NULL")]
     private $pageData;
 
-    /**
-     * @ORM\OneToOne(targetEntity=CompiledHtml::class, cascade={"persist", "remove"}, fetch="LAZY")
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id", onDelete="SET NULL")
-     *
-     * @Gedmo\Versioned
-     */
+    #[ORM\OneToOne(targetEntity: CompiledHtml::class, cascade: ["persist", "remove"], fetch: "LAZY")]
+    #[ORM\JoinColumn(nullable: true, referencedColumnName: "id", onDelete: "SET NULL")]
+    #[Gedmo\Versioned]
     private $compiledHtml;
 
-    /**
-     * @var CompiledScripts
-     *
-     * @ORM\OneToOne(targetEntity=CompiledScripts::class, cascade={"persist", "remove"}, fetch="LAZY")
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id", onDelete="SET NULL")
-     *
-     * @Gedmo\Versioned
-     */
+    #[ORM\OneToOne(targetEntity: CompiledScripts::class, cascade: ["persist", "remove"], fetch: "LAZY")]
+    #[ORM\JoinColumn(nullable: true, referencedColumnName: "id", onDelete: "SET NULL")]
     private $compiledScripts;
 
-    /**
-     * @var CompiledStyles
-     *
-     * @ORM\OneToOne(targetEntity=CompiledStyles::class, cascade={"persist", "remove"}, fetch="LAZY")
-     * @ORM\JoinColumn(nullable=true, referencedColumnName="id", onDelete="SET NULL")
-     *
-     * @Gedmo\Versioned
-     */
+    #[ORM\OneToOne(targetEntity: CompiledStyles::class, cascade: ["persist", "remove"], fetch: "LAZY")]
+    #[ORM\JoinColumn(nullable: true, referencedColumnName: "id", onDelete: "SET NULL")]
+    #[Gedmo\Versioned]
     private $compiledStyles;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default":0})
-     */
+    #[ORM\Column(type: "boolean", options: ["default" => 0])]
     private $isHomepage = false;
 
-    /**
-     * @ORM\Column(type="string", length=50, options={"default": "public"})
-     */
+    #[ORM\Column(type: "string", length: 50, options: ["default" => "public"])]
     private $visibility = CollectionConst::ITEM_DEFAULT_VISIBILITY_STATUS;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $itemPassword;
 
     public function __construct()
@@ -263,7 +216,7 @@ class CollectionItem
 
     public function getTitle(): string
     {
-        return (string) $this->title;
+        return (string)$this->title;
     }
 
     public function setTitle(?string $title): self

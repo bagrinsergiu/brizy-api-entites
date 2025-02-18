@@ -6,18 +6,17 @@ namespace Brizy\Bundle\ApiEntitiesBundle\Entity\Collections;
 
 
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits as CommonTraits;
+use Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 
-/**
- * @ORM\Entity(repositoryClass="Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionCategoryRepository", readOnly=true)
- * @ORM\Table(
- *     uniqueConstraints={},
- *     indexes={
- *          @Index(columns={"project_id", "priority"}),
- *     }
- * )
- */
+#[ORM\Entity(repositoryClass: CollectionCategoryRepository::class, readOnly: true)]
+#[ORM\Table(
+    indexes: [
+        new ORM\Index(columns: ["project_id", "priority"])
+    ],
+    uniqueConstraints: []
+)]
 class CollectionCategory
 {
     use CommonTraits\IdTrait;

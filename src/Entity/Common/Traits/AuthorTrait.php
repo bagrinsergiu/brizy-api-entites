@@ -9,9 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait AuthorTrait
 {
-    /**
-     * @ORM\Column(type="int", nullable=true, name="author_id")
-     */
+    #[ORM\Column(type: "integer", nullable: true, name: 'author_id')]
     protected $author;
 
     public function getAuthor()

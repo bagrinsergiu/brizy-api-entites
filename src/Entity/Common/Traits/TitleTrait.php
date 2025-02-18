@@ -10,9 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait TitleTrait
 {
-    /**
-     * @ORM\Column(type="string", length=120, nullable=false)
-     */
+     #[ORM\Column(type: "string", nullable: false, length: 120)]
     protected $title;
 
     public function getTitle(): ?string

@@ -9,9 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait DependenciesTrait
 {
-    /**
-     * @ORM\Column(type="simple_array", nullable=true)
-     */
+     #[ORM\Column(type: "simple_array", nullable: true)]
     protected  $dependencies = null;
 
     public function getDependencies()
