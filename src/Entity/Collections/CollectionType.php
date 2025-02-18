@@ -6,6 +6,7 @@ namespace Brizy\Bundle\ApiEntitiesBundle\Entity\Collections;
 
 
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits as CommonTraits;
+use Brizy\Bundle\ApiEntitiesBundle\Entity\Template;
 use Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionTypeRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
