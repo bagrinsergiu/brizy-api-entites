@@ -31,19 +31,21 @@ final class BrizyApiEntitiesBundle extends Bundle
     private function configureDoctrineExtension(ContainerBuilder $container): void
     {
         $namespaces = ['Brizy\Bundle\ApiEntitiesBundle\Entity'];
-        $directories = [realpath(__DIR__.'/Entity')];
+        $directories = [realpath(__DIR__ . '/Entity')];
         $managerParameters = [BrizyApiEntitiesBundleExtension::DOCTRINE_MANAGER];
         $enabledParameter = BrizyApiEntitiesBundleExtension::DOCTRINE_MAPPING;
         $aliasMap = ['BrizyApiEntitiesBundle' => 'Brizy\Bundle\ApiEntitiesBundle\Entity'];
 
-        $container->addCompilerPass(
-            DoctrineOrmMappingsPass::createAnnotationMappingDriver(
-                $namespaces,
-                $directories,
-                $managerParameters,
-                $enabledParameter,
-                $aliasMap
-            ), \Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, 0
-        );
+        if (class_exists(DoctrineOrmMappingsPass::class)) {
+            $container->addCompilerPass(
+                DoctrineOrmMappingsPass::createAnnotationMappingDriver(
+                    $namespaces,
+                    $directories,
+                    $managerParameters,
+                    $enabledParameter,
+                    $aliasMap
+                ), \Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, 0
+            );
+        }
     }
 }
