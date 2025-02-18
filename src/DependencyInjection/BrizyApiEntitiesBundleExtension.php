@@ -28,6 +28,11 @@ class BrizyApiEntitiesBundleExtension extends Extension
         $loader->load('services.yaml');
 
         $config = $this->processConfiguration(new Configuration(), $configs);
+
+        if(isset($config['persistence']['doctrine']['entity_manager']['name']))
+        {
+            $container->setParameter(self::DOCTRINE_MANAGER, $config['persistence']['doctrine']['entity_manager']['name']);
+        }
     }
 
 }
