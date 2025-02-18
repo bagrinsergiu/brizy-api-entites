@@ -74,7 +74,7 @@ class CollectionType
     #[ORM\Column(type: "json", nullable: true)]
     protected $settings = [];
 
-    #[ORM\OneToMany(targetEntity: \App\Entity\Template::class, mappedBy: "type")]
+    #[ORM\OneToMany(targetEntity: Template::class, mappedBy: "type")]
     private Collection $templates;
 
     #[ORM\Column(type: "boolean", nullable: false, options: ["default" => 1])]

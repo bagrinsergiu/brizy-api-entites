@@ -8,9 +8,7 @@ use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits\ProjectTrait;
 use Brizy\Bundle\ApiEntitiesBundle\Repository\PageDataRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=PageDataRepository::class)
- */
+#[ORM\Entity(repositoryClass: PageDataRepository::class)]
 class PageData
 {
     use IdTrait;
@@ -18,9 +16,7 @@ class PageData
 
     public const DEFAULT_DATA = '';
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+   #[ORM\Column(type: "text", nullable: true)]
     private $data = self::DEFAULT_DATA;
 
     public function __construct(?string $data = null)
