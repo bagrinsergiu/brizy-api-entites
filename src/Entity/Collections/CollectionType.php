@@ -19,18 +19,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     repositoryClass: CollectionTypeRepository::class,
     readOnly: true
 )]
-#[ORM\Table(
-    indexes: [
-        new ORM\Index(columns: ["project_id", "priority"]),
-    ],
-    uniqueConstraints: [
-        new ORM\UniqueConstraint(columns: ["project_id", "id"]),
-        new ORM\UniqueConstraint(columns: ["project_id", "title"]),
-        new ORM\UniqueConstraint(columns: ["project_id", "slug"]),
-    ]
-)]
-#[UniqueEntity(fields: ["project", "title"], errorPath: "title")]
-#[UniqueEntity(fields: ["project", "slug"], errorPath: "slug")]
 class CollectionType
 {
     use CommonTraits\IdTrait;

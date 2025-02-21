@@ -11,12 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 
 #[ORM\Entity(repositoryClass: CollectionCategoryRepository::class, readOnly: true)]
-#[ORM\Table(
-    indexes: [
-        new ORM\Index(columns: ["project_id", "priority"])
-    ],
-    uniqueConstraints: []
-)]
 class CollectionCategory
 {
     use CommonTraits\IdTrait;

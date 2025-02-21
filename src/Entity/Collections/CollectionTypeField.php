@@ -13,32 +13,9 @@ use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-/**
- * @ORM\Entity(repositoryClass="Brizy\Bundle\ApiEntitiesBundle\Repository\Collections\CollectionTypeFieldRepository", readOnly=true)
- * @ORM\Table(
- *     uniqueConstraints={
- *          @UniqueConstraint(columns={"collection_type_id", "slug"}),
- *          @UniqueConstraint(columns={"project_id","collection_type_id", "id"}),
- *     },
- *     indexes={
- *          @Index(columns={"collection_type_id","project_id", "priority"}),
- *          @Index(columns={"id","project_id", "priority"}),
- *     }
- * )
- *
- * @UniqueEntity(fields={"collectionType", "slug"}, errorPath="slug")
- */
+
 #[ORM\Entity(repositoryClass: CollectionTypeFieldRepository::class)]
-#[ORM\Table(
-    indexes: [
-        new ORM\Index(columns: ["collection_type_id", "project_id", "priority"]),
-        new ORM\Index(columns: ["id", "project_id", "priority"]),
-    ],
-    uniqueConstraints: [
-        new ORM\UniqueConstraint(columns: ["collection_type_id", "slug"]),
-        new ORM\UniqueConstraint(columns: ["project_id", "collection_type_id", "id"]),
-    ]
-)]
+
 #[UniqueEntity(fields: ["collectionType", "slug"], errorPath: "slug")]
 class CollectionTypeField
 {

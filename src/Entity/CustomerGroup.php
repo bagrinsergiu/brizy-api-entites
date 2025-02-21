@@ -9,13 +9,11 @@ use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits\CreatedAtTrait;
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits\IdTrait;
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits\ProjectTrait;
 use Brizy\Bundle\ApiEntitiesBundle\Entity\Common\Traits\UpdatedAtTrait;
+use Brizy\Bundle\ApiEntitiesBundle\Repository\CustomerGroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @ORM\Entity(repositoryClass=CustomerGroupRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"name": "partial"})
- */
+#[ORM\Entity(repositoryClass: CustomerGroupRepository::class)]
 class CustomerGroup
 {
     use IdTrait;
@@ -23,19 +21,12 @@ class CustomerGroup
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /**
-     * @ORM\Column(type="string", length=40, nullable=false)
-     *
-     * @Assert\Length(max="40")
-     * @Assert\NotNull
-     *
-     * @Groups({ WebhookConst::ENTITY_MESSAGE_GROUP })
-     */
+
+
+    #[ORM\Column(type: "string", length: 40, nullable: false)]
     private $name;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Customer::class, mappedBy="customerGroups")
-     */
+     #[ORM\ManyToMany(targetEntity: Customer::class, mappedBy: 'customerGroups')]
     private $customers;
 
     public function __construct()

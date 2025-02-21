@@ -14,16 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
     repositoryClass: CollectionItemFieldRepository::class,
     readOnly: true
 )]
-#[ORM\Table(
-    indexes: [
-        new ORM\Index(columns: ["project_id", "item_id"])
-    ],
-    uniqueConstraints: [
-        new ORM\UniqueConstraint(columns: ["item_id", "type_id"]),
-        new ORM\UniqueConstraint(columns: ["project_id", "type_id", "id"]),
-        new ORM\UniqueConstraint(columns: ["project_id", "item_id", "type_id"])
-    ]
-)]
 class CollectionItemField
 {
     use CommonTraits\IdTrait;

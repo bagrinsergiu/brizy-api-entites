@@ -12,8 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CollectionEditorRepository::class, readOnly: true)]
-#[ORM\Table(uniqueConstraints: [new ORM\UniqueConstraint(columns: ["project_id", "title"])])]
-#[UniqueEntity(fields: ["project", "title"], errorPath: "title")]
 class CollectionEditor
 {
     use CommonTraits\IdTrait;

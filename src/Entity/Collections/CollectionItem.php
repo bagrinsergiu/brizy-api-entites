@@ -44,16 +44,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: CollectionItemRepository::class, readOnly: true)]
-#[ORM\Table(
-    indexes: [
-        new ORM\Index(columns: ["project_id", "id"]),
-        new ORM\Index(columns: ["project_id", "type_id", "id"]),
-        new ORM\Index(columns: ["project_id", "type_id", "title"])
-    ],
-    uniqueConstraints: [
-        new ORM\UniqueConstraint(columns: ["project_id", "slug"])
-    ]
-)]
 class CollectionItem
 {
     use CommonTraits\IdTrait;
